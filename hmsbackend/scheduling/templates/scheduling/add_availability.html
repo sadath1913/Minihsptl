@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Add Availability | Mini HMS</title>
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background: #f4f6f8;
+        }
+
+        /* Navbar */
+        .navbar {
+            background: #e67e22;
+            padding: 15px 30px;
+            color: white;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .navbar a {
+            color: white;
+            text-decoration: none;
+            font-weight: bold;
+            margin-left: 15px;
+        }
+
+        /* Main container */
+        .container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 50px;
+        }
+
+        .form-box {
+            background: white;
+            padding: 35px;
+            width: 420px;
+            border-radius: 12px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+        }
+
+        h2 {
+            text-align: center;
+            color: #2c3e50;
+            margin-bottom: 10px;
+        }
+
+        p {
+            text-align: center;
+            color: #555;
+            margin-bottom: 25px;
+        }
+
+        label {
+            display: block;
+            margin-top: 15px;
+            font-weight: bold;
+            color: #2c3e50;
+        }
+
+        input {
+            width: 100%;
+            padding: 10px;
+            margin-top: 6px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+            font-size: 14px;
+        }
+
+        button {
+            width: 100%;
+            margin-top: 25px;
+            padding: 12px;
+            border: none;
+            background: #e67e22;
+            color: white;
+            font-size: 16px;
+            border-radius: 6px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background: #d35400;
+        }
+
+        .links {
+            text-align: center;
+            margin-top: 15px;
+        }
+
+        .links a {
+            text-decoration: none;
+            font-weight: bold;
+            color: #3498db;
+        }
+    </style>
+</head>
+
+<body>
+
+<!-- Navbar -->
+<div class="navbar">
+    <div>Mini HMS | Doctor</div>
+    <div>
+        <a href="{% url 'doctor_dashboard' %}">Dashboard</a>
+        <a href="{% url 'logout' %}">Logout</a>
+    </div>
+</div>
+
+<!-- Form -->
+<div class="container">
+    <div class="form-box">
+        <h2>Add Availability</h2>
+        <p>Create a time slot for patients to book</p>
+
+        <form method="post">
+            {% csrf_token %}
+
+            <label for="id_date">Date</label>
+            {{ form.date }}
+
+            <label for="id_start_time">Start Time</label>
+            {{ form.start_time }}
+
+            <label for="id_end_time">End Time</label>
+            {{ form.end_time }}
+
+            <button type="submit">Save Availability</button>
+        </form>
+
+        <div class="links">
+            <a href="{% url 'doctor_dashboard' %}">⬅ Back to Dashboard</a>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>

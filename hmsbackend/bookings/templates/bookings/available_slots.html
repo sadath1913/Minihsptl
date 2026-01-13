@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Book Appointment | Mini HMS</title>
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background: #f4f6f8;
+        }
+
+        /* Navbar */
+        .navbar {
+            background: #3498db;
+            padding: 15px 30px;
+            color: white;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .navbar a {
+            color: white;
+            text-decoration: none;
+            font-weight: bold;
+            margin-left: 15px;
+        }
+
+        /* Main container */
+        .container {
+            padding: 40px;
+        }
+
+        h2 {
+            color: #2c3e50;
+            margin-bottom: 10px;
+        }
+
+        .slots {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 25px;
+            margin-top: 30px;
+        }
+
+        .slot-card {
+            background: white;
+            padding: 25px;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+
+        .slot-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+        }
+
+        .slot-card h3 {
+            margin-top: 0;
+            color: #2c3e50;
+        }
+
+        .slot-card p {
+            margin: 8px 0;
+            color: #555;
+        }
+
+        .book-btn {
+            display: inline-block;
+            margin-top: 15px;
+            padding: 10px 18px;
+            background: #2ecc71;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            font-weight: bold;
+        }
+
+        .book-btn:hover {
+            background: #27ae60;
+        }
+
+        .empty {
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            text-align: center;
+            color: #555;
+            margin-top: 40px;
+        }
+    </style>
+</head>
+
+<body>
+
+<!-- Navbar -->
+<div class="navbar">
+    <div>Mini HMS | Book Appointment</div>
+    <div>
+        <a href="{% url 'patient_dashboard' %}">Dashboard</a>
+        <a href="{% url 'logout' %}">Logout</a>
+    </div>
+</div>
+
+<!-- Main content -->
+<div class="container">
+    <h2>Available Appointment Slots</h2>
+    <p>Select a doctor and time slot to book your appointment.</p>
+
+    {% if slots %}
+        <div class="slots">
+            {% for slot in slots %}
+                <div class="slot-card">
+                    <h3>🩺 Dr. {{ slot.doctor.username }}</h3>
+                    <p><strong>Date:</strong> {{ slot.date }}</p>
+                    <p><strong>Time:</strong> {{ slot.start_time }} – {{ slot.end_time }}</p>
+
+                    <a href="{% url 'book_slot' slot.id %}" class="book-btn">
+                        Book Appointment
+                    </a>
+                </div>
+            {% endfor %}
+        </div>
+    {% else %}
+        <div class="empty">
+            <h3>No slots available 😕</h3>
+            <p>Please check back later or try another doctor.</p>
+        </div>
+    {% endif %}
+</div>
+
+</body>
+</html>

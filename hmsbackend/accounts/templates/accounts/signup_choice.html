@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Signup | Mini HMS</title>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: linear-gradient(to right, #8e44ad, #3498db);
+            height: 100vh;
+            margin: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .box {
+            background: white;
+            padding: 40px;
+            width: 420px;
+            border-radius: 12px;
+            text-align: center;
+            box-shadow: 0 15px 30px rgba(0,0,0,0.2);
+        }
+
+        h1 {
+            margin-bottom: 10px;
+            color: #2c3e50;
+        }
+
+        p {
+            color: #555;
+            margin-bottom: 30px;
+        }
+
+        a {
+            text-decoration: none;
+        }
+
+        .btn {
+            display: block;
+            width: 100%;
+            padding: 14px;
+            margin: 12px 0;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: bold;
+            color: white;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+
+        .btn-patient {
+            background: #2ecc71;
+        }
+
+        .btn-doctor {
+            background: #e67e22;
+        }
+
+        .btn-login {
+            background: #3498db;
+            margin-top: 20px;
+        }
+
+        .btn-home {
+            background: #7f8c8d;
+            margin-top: 10px;
+        }
+
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 15px rgba(0,0,0,0.2);
+        }
+
+        .small-text {
+            margin-top: 20px;
+            font-size: 14px;
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="box">
+    <h1>Create an Account</h1>
+    <p>Select your role to get started</p>
+
+    <a href="{% url 'patient_signup' %}" class="btn btn-patient">
+        👤 Patient Signup
+    </a>
+
+    <a href="{% url 'doctor_signup' %}" class="btn btn-doctor">
+        🩺 Doctor Signup
+    </a>
+
+    <div class="small-text">
+        Already have an account?
+    </div>
+
+    <a href="{% url 'login' %}" class="btn btn-login">
+        Login
+    </a>
+
+    <a href="{% url 'home' %}" class="btn btn-home">
+        ⬅ Back to Home
+    </a>
+</div>
+
+</body>
+</html>

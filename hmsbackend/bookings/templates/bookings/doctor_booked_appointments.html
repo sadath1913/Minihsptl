@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Booked Appointments | Mini HMS</title>
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background: #f4f6f8;
+        }
+
+        /* Navbar */
+        .navbar {
+            background: #e67e22;
+            padding: 15px 30px;
+            color: white;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .navbar a {
+            color: white;
+            text-decoration: none;
+            font-weight: bold;
+            margin-left: 15px;
+        }
+
+        .container {
+            padding: 40px;
+        }
+
+        h2 {
+            color: #2c3e50;
+        }
+
+        .appointments {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 25px;
+            margin-top: 30px;
+        }
+
+        .card {
+            background: white;
+            padding: 25px;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+
+        .card h3 {
+            margin-top: 0;
+            color: #2c3e50;
+        }
+
+        .card p {
+            margin: 8px 0;
+            color: #555;
+        }
+
+        .status {
+            margin-top: 12px;
+            font-weight: bold;
+            color: #27ae60;
+        }
+
+        .empty {
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            text-align: center;
+            color: #555;
+            margin-top: 40px;
+        }
+        .cancel-btn {
+            display: inline-block;
+            margin-top: 12px;
+            padding: 8px 14px;
+            background: #e74c3c;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            font-weight: bold;
+            font-size: 14px;
+        }
+
+        .cancel-btn:hover {
+            background: #c0392b;
+        }
+
+    </style>
+</head>
+
+<body>
+
+<!-- Navbar -->
+<div class="navbar">
+    <div>Mini HMS | Doctor</div>
+    <div>
+        <a href="{% url 'doctor_dashboard' %}">Dashboard</a>
+        <a href="{% url 'logout' %}">Logout</a>
+    </div>
+</div>
+
+<!-- Content -->
+<div class="container">
+    <h2>Booked Appointments</h2>
+    <p>These are the appointments booked by patients.</p>
+
+    {% if bookings %}
+        <div class="appointments">
+            {% for booking in bookings %}
+             <div class="card">
+    <h3>👤 {{ booking.patient.username }}</h3>
+
+    <p><strong>Date:</strong> {{ booking.availability.date }}</p>
+    <p><strong>Time:</strong>
+        {{ booking.availability.start_time }} –
+        {{ booking.availability.end_time }}
+    </p>
+
+    <p class="status">✔ Confirmed</p>
+
+    <a href="{% url 'cancel_appointment' booking.id %}"
+       class="cancel-btn"
+       onclick="return confirm('Are you sure you want to cancel this appointment?');">
+        ❌ Cancel Appointment
+    </a>
+            </div>
+
+            {% endfor %}
+        </div>
+    {% else %}
+        <div class="empty">
+            <h3>No bookings yet 😕</h3>
+            <p>Your available slots haven’t been booked yet.</p>
+        </div>
+    {% endif %}
+
+</div>
+
+</body>
+</html>
